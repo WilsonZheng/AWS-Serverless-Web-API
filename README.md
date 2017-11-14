@@ -12,15 +12,15 @@ AWS Weather Web API
 7. To run the function (test it locallly): "serverless invoke local --function getWeather"
 8. If step 7 returns response, something like
 
-{
-    "statusCode": 200,
-    "headers": {
-        "Access-Control-Allow-Origin": "*"
-    },
-    "body": "{\"temperature\":19.2}"
-}
+        {
+            "statusCode": 200,
+            "headers": {
+                "Access-Control-Allow-Origin": "*"
+            },
+            "body": "{\"temperature\":19.2}"
+        }
 
-then run the command: "serverless deploy"
+        then run the command: "serverless deploy"
 
  
 # Serverless quick start tutorial
