@@ -11,6 +11,6 @@ AWS Weather Web API
 6. add function.js file
 7. to run the function: "serverless invoke local --function getWeather"
 
-#Serverless quick start tutorial
+# Serverless quick start tutorial
 https://serverless.com/framework/docs/getting-started#pre-requisites
 
