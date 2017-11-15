@@ -28,7 +28,13 @@ endpoints:
   GET - https://tp63aloptg.execute-api.us-east-1.amazonaws.com/dev/weather
 
 10. Create Webpage folder and app.js, index.html inside the folder
+11. run "npm install node-fetch -save" in WeatherInAuckland folder, so when use serverless to deploy the app to AWS, the lambda function will include the fetch library
+
+12. Use serverless.yml to include AppID of OpenWeather API
+13. Deploy the app again in AWS and now it should get the temperature data of Auckland as response.
 
 # Serverless quick start tutorial
 https://serverless.com/framework/docs/getting-started#pre-requisites
+
+Reference:http://toniando.com/posts/weather-in-venice-web-app-lambda-and-api-gateway/ 
 

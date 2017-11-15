@@ -20,7 +20,8 @@ service: WeatherInAuckland
 provider:
   name: aws
   runtime: nodejs6.10
-
+  environment:
+    APPID: f64643f57568d8f7e20dcea085c7291f
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
