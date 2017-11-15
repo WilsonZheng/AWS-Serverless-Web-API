@@ -1,7 +1,7 @@
 # AWS-Serverless-Web-API
 AWS Weather Web API
 
-# To run the app:
+# Walkflow of developing the API:
 1. Installing the serverless cli:
     "npm install -g serverless"
 2. Make sure Node.js v6.5.0 or later installed
@@ -10,7 +10,9 @@ AWS Weather Web API
 5. Modify the serverless.yml file 
 6. Add function.js file
 7. To run the function (test it locallly): "serverless invoke local --function getWeather"
-8. If step 7 returns response, something like
+8. Setup aws provider credentials, follow this link (do the "Using AWS profiles" option): https://serverless.com/framework/docs/providers/aws/guide/credentials/
+
+9. If step 7 returns response, something like
 
         {
             "statusCode": 200,
@@ -20,9 +22,13 @@ AWS Weather Web API
             "body": "{\"temperature\":19.2}"
         }
 
-        then run the command: "serverless deploy"
+        then run the command: "serverless deploy" and wait it to finish. Now the code is deployed in AWS.
+9. Check the console output, be aware of the endpoints info. For example: 
+endpoints:
+  GET - https://tp63aloptg.execute-api.us-east-1.amazonaws.com/dev/weather
 
- 
+10. Create Webpage folder and app.js, index.html inside the folder
+
 # Serverless quick start tutorial
 https://serverless.com/framework/docs/getting-started#pre-requisites
 
