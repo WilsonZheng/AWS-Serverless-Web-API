@@ -1,5 +1,5 @@
 # AWS-Serverless-Web-API
-AWS Weather Web API
+AWS Weather Web API: Host a web API on AWS using Lambda function and API GateWay to get data from OpenWeather API(data is Auckland weather)
 
 # Walkflow of developing the API:
 1. Installing the serverless cli:
