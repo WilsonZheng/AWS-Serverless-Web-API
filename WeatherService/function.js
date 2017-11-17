@@ -24,10 +24,12 @@ module.exports.getWeather = (event, context, callback) => {
 
   // OpenWeatherMap API endpoint.
   //console.log(process.env.APPID);
-  console.log(JSON.stringify(event));
+  console.log('event:'+JSON.stringify(event));
+  console.log('city:'+JSON.stringify(event.queryStringParameters.city));
+  console.log('country:'+JSON.stringify(event.queryStringParameters.country));
   let id = process.env.APPID;
-  let ct = event.city;
-  let country = event.country;
+  let ct = event.queryStringParameters.city;
+  let country = event.queryStringParameters.country;
   const endpoint = 'http://api.openweathermap.org/data/2.5/weather?q=' + ct + ',' + country + '&units=metric&appid=' + id;
 
   fetch(endpoint)
