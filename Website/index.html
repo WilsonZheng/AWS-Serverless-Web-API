@@ -71,8 +71,9 @@
 				<div class="forecast-container">
 					<div class="today forecast">
 						<div class="forecast-header">
-							<div class="day">Monday</div>
-							<div class="date">6 Oct</div>
+							<div class="day">Today</div>
+							<div class="date"><p id ="today"></p></div>
+							
 						</div>
 						<!-- .forecast-header -->
 						<div class="forecast-content">
@@ -243,7 +244,9 @@
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/plugins.js"></script>
 	<script src="js/app.js"></script>
-
+	<script>
+		document.getElementById("today").innerHTML = new Date().toDateString();
+	</script>
 </body>
 
 </html>
