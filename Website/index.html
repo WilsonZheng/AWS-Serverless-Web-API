@@ -71,26 +71,43 @@
 				<div class="forecast-container">
 					<div class="today forecast">
 						<div class="forecast-header">
-							<div class="day">Today</div>
-							<div class="date"><p id ="today"></p></div>
-							
+							<div class="day">
+								<b>Today</b>
+							</div>
+							<div class="date">
+								<b id="today"></b>
+							</div>
+
 						</div>
 						<!-- .forecast-header -->
 						<div class="forecast-content">
-							<div class="location">New York</div>
+							<div class="location">Auckland</div>
 							<div class="degree">
-								<div class="num">23
+								<div class="num" id="aklTemp">
+									<img class="bigLoading" src="images/Loading_icon.gif" alt="..">
 									<sup>o</sup>C</div>
 								<div class="forecast-icon">
 									<img src="images/icons/icon-1.svg" alt="" width=90>
 								</div>
 							</div>
 							<span>
-								<img src="images/icon-umberella.png" alt="">20%</span>
+								<img src="images/icon-umberella.png" alt="">
+								<b class="num" id="aklHumidity">
+									<img class="smallLoading" src="images/Loading_icon.gif" alt="..">
+								</b>
+							</span>
 							<span>
-								<img src="images/icon-wind.png" alt="">18km/h</span>
+								<img src="images/icon-wind.png" alt="">
+								<b class="num" id="aklWindSpeed">
+									<img class="smallLoading" src="images/Loading_icon.gif" alt="..">
+								</b>
+							</span>
 							<span>
-								<img src="images/icon-compass.png" alt="">East</span>
+								<img src="images/icon-compass.png" alt="">
+								<b class="num" id="aklWindDegree">
+									<img class="smallLoading" src="images/Loading_icon.gif" alt="..">
+								</b>
+							</span>
 						</div>
 					</div>
 					<div class="forecast">
@@ -197,8 +214,8 @@
 
 			<div class="fullwidth-block" data-bg-color="#262936">
 				<div class="container">
-					<h1>What is the temperature in Auckland, New Zealand?</h1>
-					<h2 id='temperature'>Checking...</h2>
+					<!-- <h1>What is the temperature in Auckland, New Zealand?</h1>
+					<h2 id='temperature'>Checking...</h2> -->
 
 					<script src="fetchData.js" charset="utf-8"></script>
 				</div>
@@ -247,6 +264,18 @@
 	<script>
 		document.getElementById("today").innerHTML = new Date().toDateString();
 	</script>
+
 </body>
 
 </html>
+
+<style>
+	.bigLoading {
+		width: 50px;
+		height: 50px;
+	}
+	.smallLoading {
+		width: 25px;
+		height: 25px;
+	}
+</style>

@@ -24,27 +24,73 @@ module.exports.getWeather = (event, context, callback) => {
 
   // OpenWeatherMap API endpoint.
   //console.log(process.env.APPID);
-  console.log('event:'+JSON.stringify(event));
-  console.log('city:'+JSON.stringify(event.queryStringParameters.city));
-  console.log('country:'+JSON.stringify(event.queryStringParameters.country));
+  console.log('event:' + JSON.stringify(event));
+  console.log('city:' + JSON.stringify(event.queryStringParameters.city));
+  console.log('country:' + JSON.stringify(event.queryStringParameters.country));
   let id = process.env.APPID;
   let ct = event.queryStringParameters.city;
   let country = event.queryStringParameters.country;
-  const endpoint = 'http://api.openweathermap.org/data/2.5/weather?q=' + ct + ',' + country + '&units=metric&appid=' + id;
+  const endpointCurrentWeather = 'http://api.openweathermap.org/data/2.5/weather?q=' + ct + ',' + country + '&units=metric&appid=' + id;
+  //const endpoint5DayWeather = 'http://api.openweathermap.org/data/2.5/forecast?q=' + ct + ',' + country + '&units=metric&appid=' + id;
+  
+  fetch(endpointCurrentWeather)
+  .then(res => res.json())
+  .then(body => {
+    const response = {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({ 
+        weather: body.weather.main,
+        weatherDetail: body.weather.description,
+        weatherIcon: body.weather.icon,
+        temperature: body.main.temp,
+        pressure: body.main.pressure,
+        humidity: body.main.humidity,
+        windspeed: body.wind.speed,
+        windDegree: body.wind.deg,
+       })
+    };
 
-  fetch(endpoint)
-    .then(res => res.json())
-    .then(body => {
-      const response = {
-        statusCode: 200,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify({ temperature: body.main.temp })
-      };
+    callback(null, response);
+  });
+  // fetch(endpoint5DayWeather)
+  //   .then(res => res.json())
+  //   .then(body => {
+  //     //Get current date value for comparison 
+  //     var currentDatetime = new Date();
+  //     var currentDate = currentDatetime.getDate();
+  //     var currentMonth = currentDatetime.getMonth()+1;
+  //     var currentYear = currentDatetime.getFullYear();
+      
 
-      callback(null, response);
-    });
+
+
+  //     // Create a new JavaScript Date object based on the timestamp
+  //     // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+  //     var date = new Date(unix_timestamp * 1000);
+
+  //     var datepart = date.getDate();
+  //     // Hours part from the timestamp
+  //     var hours = date.getHours();
+  //     // Minutes part from the timestamp
+  //     var minutes = "0" + date.getMinutes();
+  //     // Seconds part from the timestamp
+  //     var seconds = "0" + date.getSeconds();
+
+  //     // Will display time in 10:30:23 format
+  //     var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+  //     const response = {
+  //       statusCode: 200,
+  //       headers: {
+  //         "Access-Control-Allow-Origin": "*",
+  //       },
+  //       body: JSON.stringify({ temperature: body.main.temp })
+  //     };
+
+  //     callback(null, response);
+  //   });
 
 
 
