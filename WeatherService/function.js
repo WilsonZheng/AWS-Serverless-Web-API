@@ -42,9 +42,9 @@ module.exports.getWeather = (event, context, callback) => {
         "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({ 
-        weather: body.weather.main,
-        weatherDetail: body.weather.description,
-        weatherIcon: body.weather.icon,
+        weather: body.weather[0].main,
+        weatherDetail: body.weather[0].description,
+        weatherIcon: body.weather[0].icon,
         temperature: body.main.temp,
         pressure: body.main.pressure,
         humidity: body.main.humidity,

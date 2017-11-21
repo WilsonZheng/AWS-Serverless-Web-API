@@ -1,5 +1,5 @@
 function renderTemp(data) {
-    
+
     var el = document.getElementById('aklTemp');
     el.innerHTML = data.temperature + " °C";
 
@@ -12,6 +12,12 @@ function renderTemp(data) {
     var el4 = document.getElementById('aklWindDegree');
     el4.innerHTML = data.windDegree + "°";
     
+    var el5 = document.getElementById('aklWeather');
+    var iconUrl = "http://openweathermap.org/img/w/" + data.weatherIcon + ".png";
+    el5.src = iconUrl;
+    
+    
+
 }
 
 // replace with the endpoint created in your deployment.
