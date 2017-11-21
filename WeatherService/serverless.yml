@@ -22,6 +22,7 @@ provider:
   runtime: nodejs6.10
   environment:
     APPID: f64643f57568d8f7e20dcea085c7291f
+    APPID2: 08dbab0eeefe53317d2e0ad7c2a2e060
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
