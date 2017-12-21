@@ -28,20 +28,24 @@ module.exports.getWeather = (event, context, callback) => {
   console.log('city:' + JSON.stringify(event.queryStringParameters.city));
   console.log('country:' + JSON.stringify(event.queryStringParameters.country));
   let id = process.env.APPID;
+  let id2 = process.env.APPID2;
   let ct = event.queryStringParameters.city;
   let country = event.queryStringParameters.country;
   const endpointCurrentWeather = 'http://api.openweathermap.org/data/2.5/weather?q=' + ct + ',' + country + '&units=metric&appid=' + id;
   //const endpoint5DayWeather = 'http://api.openweathermap.org/data/2.5/forecast?q=' + ct + ',' + country + '&units=metric&appid=' + id;
-  
+  const endpoint7DayDailWeather = 'http://api.openweathermap.org/data/2.5/forecast/daily?q=' + ct + ',' + country + '&units=metric&cnt=7&appid=' + id2;
+  const response = {
+    statusCode: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+    body: ""
+  }
+  let weatherArray = [];
   fetch(endpointCurrentWeather)
-  .then(res => res.json())
-  .then(body => {
-    const response = {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({ 
+    .then(res => res.json())
+    .then(body => {
+      let todayWeather = JSON.stringify({
         weather: body.weather[0].main,
         weatherDetail: body.weather[0].description,
         weatherIcon: body.weather[0].icon,
@@ -50,48 +54,48 @@ module.exports.getWeather = (event, context, callback) => {
         humidity: body.main.humidity,
         windspeed: body.wind.speed,
         windDegree: body.wind.deg,
-       })
-    };
+      })
+      weatherArray.push(todayWeather)
+      console.log("weatherArray first built:" + JSON.stringify(weatherArray));
+      //callback(null, response);
+    })
+    .then(() => {
+      fetch(endpoint7DayDailWeather)
+        .then(res => res.json())
+        .then(d => {
+          d.list.forEach(element => {
+            let singleWeatherData = JSON.stringify({
+              max: element.temp.max,
+              min: element.temp.min,
+              weatherIcon: element.weather.icon
+            })
+            weatherArray.push(singleWeatherData)
+          });
+          console.log("weatherArray second built:" + JSON.stringify(weatherArray));
 
-    callback(null, response);
-  });
-  // fetch(endpoint5DayWeather)
-  //   .then(res => res.json())
-  //   .then(body => {
-  //     //Get current date value for comparison 
-  //     var currentDatetime = new Date();
-  //     var currentDate = currentDatetime.getDate();
-  //     var currentMonth = currentDatetime.getMonth()+1;
-  //     var currentYear = currentDatetime.getFullYear();
-      
-
-
-
-  //     // Create a new JavaScript Date object based on the timestamp
-  //     // multiplied by 1000 so that the argument is in milliseconds, not seconds.
-  //     var date = new Date(unix_timestamp * 1000);
-
-  //     var datepart = date.getDate();
-  //     // Hours part from the timestamp
-  //     var hours = date.getHours();
-  //     // Minutes part from the timestamp
-  //     var minutes = "0" + date.getMinutes();
-  //     // Seconds part from the timestamp
-  //     var seconds = "0" + date.getSeconds();
-
-  //     // Will display time in 10:30:23 format
-  //     var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-  //     const response = {
-  //       statusCode: 200,
-  //       headers: {
-  //         "Access-Control-Allow-Origin": "*",
-  //       },
-  //       body: JSON.stringify({ temperature: body.main.temp })
-  //     };
-
-  //     callback(null, response);
-  //   });
-
+        })
+        .then(() => {
+          response.body = weatherArray;
+          console.log("Response built:" + JSON.stringify(response));
+          callback(null, response);
+        })
+        .catch(e => {
+          console.log(e);
+          let serverErrorResponse = {
+            statusCode: 500,
+            body: JSON.stringify(e)
+          }
+          callback(null, serverErrorResponse);
+        })
+    })
+    .catch(e => {
+      console.log(e);
+      let serverErrorResponse = {
+        statusCode: 500,
+        body: JSON.stringify(e)
+      }
+      callback(null, serverErrorResponse);
+    })
 
 
 }
