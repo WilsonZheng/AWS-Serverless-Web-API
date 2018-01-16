@@ -16,6 +16,7 @@ To use this API, an example webpage is provided under Webpage folder. Just open 
 7. To run the function (test it locallly): "serverless invoke local --function getWeather"
 8. Setup aws provider credentials, follow this link (do the "Using AWS profiles" option): https://serverless.com/framework/docs/providers/aws/guide/credentials/
 
+(or when you have multiple aws credentials, use command like "serverless deploy --aws-profile personal" to deploy, "personal" is aws profile name)
 9. If step 7 returns response, something like
 
         {
